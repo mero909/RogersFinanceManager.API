@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using System.Data.Entity;
 using RogersFinanceManager.Api.Contracts;
 using RogersFinanceManager.Api.Models;
 
 namespace RogersFinanceManager.Api.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class BillController : ApiController, IBill
     {
         [HttpGet]
@@ -15,8 +18,13 @@ namespace RogersFinanceManager.Api.Controllers
             {
                 using (var context = new RogersFinanceManagerContext())
                 {
+                    context.Configuration.LazyLoadingEnabled = false;
                     context.Database.Connection.Open();
-                    var bills = context.Bills.OrderByDescending(x => x.DueDate).ToList();
+                    var bills = context.Bills.OrderByDescending(x => x.DueDate)
+                        .Include(a => a.Account)
+                        .Include(s => s.Status)
+                        .Include(p => p.Period)
+                        .ToList();
 
                     return Ok(bills);
                 }

@@ -9,7 +9,7 @@ using RogersFinanceManager.Api.Models;
 
 namespace RogersFinanceManager.Api.Controllers
 {
-    [EnableCors(origins: "http://localhost:888", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AccountController : ApiController, IAccount
     {
         [HttpGet]
