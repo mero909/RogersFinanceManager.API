@@ -165,11 +165,13 @@
     <Compile Include="Contracts\IBill.cs" />
     <Compile Include="Contracts\IPerson.cs" />
     <Compile Include="Contracts\IPeriod.cs" />
+    <Compile Include="Contracts\IStatus.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BillController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PeriodController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

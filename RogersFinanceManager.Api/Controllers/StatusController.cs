@@ -11,19 +11,19 @@ using RogersFinanceManager.Api.Models;
 namespace RogersFinanceManager.Api.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class PeriodController : ApiController, IPeriod
+    public class StatusController : ApiController, IStatus
     {
         [HttpGet]
-        public IHttpActionResult GetPeriods()
+        public IHttpActionResult GetStatuses()
         {
             try
             {
                 using (var context = new RogersFinanceManagerContext())
                 {
                     context.Database.Connection.Open();
-                    var periods = context.Periods.OrderByDescending(x => x.EndDate).ToList();
+                    var statuses = context.Status.ToList();
 
-                    return Ok(periods);
+                    return Ok(statuses);
                 }
             }
             catch (Exception ex)
@@ -33,40 +33,22 @@ namespace RogersFinanceManager.Api.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetPeriodById(int id)
+        public IHttpActionResult GetStatusById(int id)
         {
             try
             {
                 using (var context = new RogersFinanceManagerContext())
                 {
                     context.Database.Connection.Open();
-                    var period = context.Periods.FirstOrDefault(x => x.Id == id);
+                    var status = context.Status.FirstOrDefault(x => x.Id == id);
 
-                    return Ok(period);
+                    return Ok(status);
                 }
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
-        }
-
-        [HttpDelete]
-        public IHttpActionResult DeletePeriodById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPut]
-        public IHttpActionResult UpdatePeriod(Period period)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost]
-        public IHttpActionResult AddPeriod(Period period)
-        {
-            throw new NotImplementedException();
         }
     }
 }

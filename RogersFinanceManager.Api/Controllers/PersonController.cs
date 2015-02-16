@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using RogersFinanceManager.Api.Contracts;
 using RogersFinanceManager.Api.Models;
 
 namespace RogersFinanceManager.Api.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PersonController : ApiController, IPerson
     {
         [HttpGet]
